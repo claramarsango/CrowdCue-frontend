@@ -16,4 +16,18 @@ export const Header = styled.header`
     font-size: var(--mobile-text-size-xxl);
     color: var(--text-color-white);
   }
+
+  @media (min-width: 1440px) {
+    padding: 3.5rem;
+    gap: 0.5rem;
+
+    .header__logo {
+      width: 4.2rem;
+      height: 3.7rem;
+    }
+
+    .header__title {
+      font-size: var(--desktop-text-size-xxl);
+    }
+  }
 `;
