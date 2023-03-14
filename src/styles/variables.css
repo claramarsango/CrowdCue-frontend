@@ -17,6 +17,11 @@
   --background-color-red: rgba(200, 26, 26, 0.95);
   --background-color-electric-blue: rgba(1, 43, 155, 0.95);
   --background-color-smoke-white: rgba(217, 217, 217);
+  --background-color-blue-gradient: linear-gradient(
+    180deg,
+    rgb(1, 43, 155) 0%,
+    rgb(0, 0, 0) 100%
+  );
 
   /* border-color */
   --border-color-light-grey: rgba(89, 89, 89, 0.9);
