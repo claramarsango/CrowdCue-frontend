@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+html {
+  font-family: Poppins;
+}
+
 body {
   background: var(--background-color-blue-gradient);
   background-repeat: no-repeat;
