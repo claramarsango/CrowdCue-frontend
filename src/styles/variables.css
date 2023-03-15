@@ -20,11 +20,15 @@
   --background-color-blue-gradient: linear-gradient(
     180deg,
     rgb(1, 43, 155) 0%,
-    rgb(0, 0, 0) 100%
+    rgb(0, 0, 0) 70%
   );
 
   /* border-color */
   --border-color-light-grey: rgba(89, 89, 89, 0.9);
+
+  /* border-radius */
+  --mobile-button-border-radius: 2.5rem;
+  --desktop-button-border-radius: 3.2rem;
 
   /* mobile font-size */
   --mobile-text-size-xxl: 2.5rem;
