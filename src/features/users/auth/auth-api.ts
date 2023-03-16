@@ -1,20 +1,17 @@
-import { LoginResponse, UserLogin } from '../../models/user-model';
+import { UserCredentials } from '../../../models/user-model';
 
-const logInUser = async (userToLog: UserLogin) => {
+const logInUser = async (userToLog: UserCredentials) => {
   const response = await fetch(
     'https://clara-marsango-final-project-back-202301.onrender.com/auth/login',
     {
       method: 'POST',
       headers: {
-        'Content-type': 'application/json',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(userToLog),
     },
   );
-
-  const userToken: LoginResponse = await response.json();
-
-  return userToken;
+  return response;
 };
 
 export default logInUser;
