@@ -6,7 +6,7 @@ const AuthLayout = () => {
     <>
       <Header>
         <img
-          src="crowdcue-logo.png"
+          src="/crowdcue-logo.png"
           alt="CrowdCue logo"
           className="header__logo"
         />
