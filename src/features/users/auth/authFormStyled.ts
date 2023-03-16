@@ -14,6 +14,7 @@ export const Form = styled.form`
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    position: relative;
   }
 
   .email__title,
@@ -44,10 +45,11 @@ export const Form = styled.form`
   }
 
   .form__error {
+    position: absolute;
+    top: 5.5rem;
     color: var(--text-color-red);
     font-size: var(--mobile-text-size-xs);
     text-align: left;
-    margin-top: 0.5rem;
   }
 
   .form__error--hidden {
@@ -80,7 +82,6 @@ export const Form = styled.form`
     .form__email-field,
     .form__password-field {
       gap: 2rem;
-      position: relative;
     }
 
     .email__title,
@@ -96,14 +97,14 @@ export const Form = styled.form`
 
     .form__error {
       font-size: var(--desktop-text-size-xs);
-      top: 8rem;
+      top: 8.75rem;
     }
 
     .form__submit-button {
       width: 40%;
       height: 5rem;
       font-size: var(--desktop-text-size-s);
-      margin-top: 8rem;
+      margin-top: 7rem;
     }
   }
 `;
