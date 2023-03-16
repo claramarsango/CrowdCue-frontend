@@ -64,9 +64,9 @@ export const Form = styled.form`
     border: 0;
     border-radius: var(--mobile-button-border-radius);
     height: 3.5rem;
-    width: 90%;
+    width: 18rem;
     letter-spacing: 0.1rem;
-    margin-top: 2.5rem;
+    margin-top: 5rem;
   }
 
   @media (min-width: 1440px) {
@@ -80,6 +80,7 @@ export const Form = styled.form`
     .form__email-field,
     .form__password-field {
       gap: 2rem;
+      position: relative;
     }
 
     .email__title,
@@ -95,13 +96,14 @@ export const Form = styled.form`
 
     .form__error {
       font-size: var(--desktop-text-size-xs);
+      top: 8rem;
     }
 
     .form__submit-button {
       width: 40%;
       height: 5rem;
       font-size: var(--desktop-text-size-s);
-      margin-top: 4rem;
+      margin-top: 8rem;
     }
   }
 `;
