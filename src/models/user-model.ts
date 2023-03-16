@@ -6,7 +6,11 @@ export interface User {
   inSession: string;
 }
 
-export type UserCredentials = Pick<User, 'email' | 'password'>;
+export type UserLoginCredentials = Pick<User, 'email' | 'password'>;
+
+export interface UserRegisterCredentials extends UserLoginCredentials {
+  confirmedPassword: string;
+}
 
 export interface AuthResponse {
   msg: string;
