@@ -1,16 +1,21 @@
 import { render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
+import { store } from '../../app/store';
 import Login from './Login';
 
 describe('Given a log in page,', () => {
   test('when the page is acccessed, it should show a page title', () => {
     render(
-      <MemoryRouter>
-        <Login />
-      </MemoryRouter>,
+      <Provider store={store}>
+        <MemoryRouter>
+          <Login />
+        </MemoryRouter>
+        ,
+      </Provider>,
     );
 
-    const titles = screen.getAllByRole('heading');
-    expect(titles[1]).toHaveTextContent('LOG IN');
+    const titles = screen.getByTestId('heading');
+    expect(titles).toHaveTextContent('LOG IN');
   });
 });

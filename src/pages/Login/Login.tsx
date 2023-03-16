@@ -1,9 +1,9 @@
-import LoginForm from '../../features/loginForm/LoginForm';
+import LoginForm from '../../features/users/auth/components/loginForm/LoginForm';
 import { PageTitle } from '../../shared/styles/PageTitleStyled';
 const Login = () => {
   return (
     <>
-      <PageTitle>LOG IN</PageTitle>
+      <PageTitle data-testid="heading">LOG IN</PageTitle>
       <LoginForm />
     </>
   );
