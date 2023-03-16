@@ -16,7 +16,7 @@ export const errorHandlers = [
       return res.once(
         ctx.status(404),
         ctx.json({
-          message: 'There is no registered user with this email and password',
+          msg: 'There is no registered user with this email and password',
         }),
       );
     },
