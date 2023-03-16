@@ -6,8 +6,9 @@ export interface User {
   inSession: string;
 }
 
-export type UserLogin = Pick<User, 'email' | 'password'>;
+export type UserCredentials = Pick<User, 'email' | 'password'>;
 
-export interface LoginResponse {
+export interface AuthResponse {
+  message: string;
   accessToken: string;
 }
