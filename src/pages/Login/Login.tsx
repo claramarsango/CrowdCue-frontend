@@ -1,4 +1,4 @@
-import LoginForm from '../../features/users/auth/components/loginForm/LoginForm';
+import LoginForm from '../../features/users/auth/components/login-form/LoginForm';
 import { PageTitle } from '../../shared/styles/PageTitleStyled';
 const Login = () => {
   return (
