@@ -12,6 +12,7 @@ body {
   background: var(--background-color-blue-gradient);
   background-repeat: no-repeat;
   background-position: center;
-  height: 100vh;
+  background-size: fill;
+  height: auto;
   color: var(--text-color-white);
 }
