@@ -4,14 +4,8 @@ import Login from '../pages/Login/Login';
 
 export const router = createBrowserRouter([
   {
-    path: '/auth',
+    path: '/',
     element: <AuthLayout />,
     children: [{ path: 'login', element: <Login /> }],
-  },
-  {
-    /* path: '/',
-    element: <MainLayout />,
-    //errorElement: <NotFound />,
-    children: [], */
   },
 ]);
