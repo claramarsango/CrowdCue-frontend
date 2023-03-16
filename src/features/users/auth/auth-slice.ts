@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AuthResponse, UserCredentials } from '../../../models/user-model';
 import { RootState } from '../../../app/store';
-import logInUser from './auth-api';
+import { logInUser } from './auth-api';
 
 export interface AuthFormState {
   authState: 'idle' | 'success' | 'error';
