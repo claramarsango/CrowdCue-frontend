@@ -8,9 +8,9 @@ export interface User {
 
 export type UserLoginCredentials = Pick<User, 'email' | 'password'>;
 
-export interface UserRegisterCredentials extends UserLoginCredentials {
-  confirmedPassword: string;
-}
+export type UserRegisterCredentials =
+  | Pick<User, 'email' | 'password'>
+  | 'confirmPassword';
 
 export interface AuthResponse {
   msg: string;
