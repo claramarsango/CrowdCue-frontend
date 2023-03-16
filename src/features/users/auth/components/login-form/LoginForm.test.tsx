@@ -10,7 +10,7 @@ describe('Given a log in form,', () => {
   beforeAll(() => server.listen());
   afterEach(() => server.resetHandlers());
   afterAll(() => server.close());
-  test('when the user logs in with an existing account, its LoggedIn state should become success', async () => {
+  test('when the user logs in with an existing account, its loginState state should become success', async () => {
     server.use(...handlers);
     render(
       <Provider store={store}>
