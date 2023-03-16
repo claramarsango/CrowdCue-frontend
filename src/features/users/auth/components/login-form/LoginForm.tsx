@@ -5,7 +5,7 @@ import { Form, RegisterLink } from '../../authFormStyled';
 
 const LoginForm = () => {
   const responseState = useAppSelector(selectResponseState);
-  const { authMsg, authState, status } = responseState;
+  const { loginMsg, loginState, status } = responseState;
   const dispatch = useAppDispatch();
 
   return (
@@ -43,11 +43,11 @@ const LoginForm = () => {
             />
             <p
               className={`form__error ${
-                authState === 'error' ? '' : 'form__error--hidden'
+                loginState === 'error' ? '' : 'form__error--hidden'
               }`}
               role="paragraph"
             >
-              {authMsg}
+              {loginMsg}
             </p>
           </div>
         </div>
