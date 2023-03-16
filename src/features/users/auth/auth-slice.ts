@@ -26,7 +26,7 @@ export const checkForExistingUser = createAsyncThunk(
     const apiResUserData: AuthResponse = await response.json();
 
     if (!response.ok) {
-      throw new Error(apiResUserData.message);
+      throw new Error(apiResUserData.msg);
     }
 
     return apiResUserData;

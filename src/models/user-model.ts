@@ -9,6 +9,6 @@ export interface User {
 export type UserCredentials = Pick<User, 'email' | 'password'>;
 
 export interface AuthResponse {
-  message: string;
+  msg: string;
   accessToken: string;
 }
