@@ -1,15 +1,11 @@
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import Loading from '../../shared/components/Loading';
-import {
-  checkForExistingUser,
-  selectResponseState,
-  selectSubmitState,
-} from './loginFormSlice';
-import { Form, RegisterLink } from './loginFormStyled';
+import { useAppDispatch, useAppSelector } from '../../../../../app/hooks';
+import Loading from '../../../../../shared/components/Loading';
+import { checkForExistingUser, selectResponseState } from '../../auth-slice';
+import { Form, RegisterLink } from '../../authFormStyled';
 
 const LoginForm = () => {
-  const submitState = useAppSelector(selectSubmitState);
   const responseState = useAppSelector(selectResponseState);
+  const { authMsg, authState, status } = responseState;
   const dispatch = useAppDispatch();
 
   return (
@@ -25,7 +21,13 @@ const LoginForm = () => {
             <label htmlFor="email" className="email__title">
               Email
             </label>
-            <input className="email__input" type="text" id="email" required />
+            <input
+              className="email__input"
+              type="text"
+              id="email"
+              name="email"
+              required
+            />
           </div>
 
           <div className="form__password-field">
@@ -36,22 +38,23 @@ const LoginForm = () => {
               className="password__input"
               type="password"
               id="password"
+              name="password"
               required
             />
+            <p
+              className={`form__error ${
+                authState === 'error' ? '' : 'form__error--hidden'
+              }`}
+              role="paragraph"
+            >
+              {authMsg}
+            </p>
           </div>
         </div>
 
-        <p
-          className={`form__error ${
-            submitState === 'error' ? '' : 'form__error--hidden'
-          }`}
-        >
-          This email and password are incorrect
-        </p>
-
         <button className="form__submit-button" type="submit">
           <span className="button__text">
-            {responseState !== 'loading' ? <span>Sign in</span> : <Loading />}
+            {status !== 'loading' ? <span>Sign in</span> : <Loading />}
           </span>
         </button>
       </Form>
