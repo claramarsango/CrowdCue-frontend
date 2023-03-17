@@ -25,7 +25,7 @@ const RegisterForm = () => {
             User registered successfully!
           </h2>
           <Link to="/login">
-            <button className="register__redirect-login">Log in</button>
+            <button className="register__redirect-login-button">Log in</button>
           </Link>
         </AuthUserFeedback>
       );

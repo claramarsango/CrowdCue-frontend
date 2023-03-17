@@ -17,7 +17,7 @@ export const AuthUserFeedback = styled.section`
     letter-spacing: 0.1rem;
   }
 
-  .register__redirect-login {
+  .register__redirect-login-button {
     text-align: center;
     background-color: var(--background-color-electric-blue);
     color: var(--text-color-white);
@@ -30,5 +30,27 @@ export const AuthUserFeedback = styled.section`
     width: 15rem;
     letter-spacing: 0.1rem;
     margin-top: 1.5rem;
+  }
+
+  @media (min-width: 1440px) {
+    padding: 4.5rem 0;
+    gap: 3rem;
+
+    .register__circle-check {
+      width: 20rem;
+      height: 20rem;
+    }
+
+    .register__success-message {
+      font-size: var(--desktop-text-size-m);
+      width: 30%;
+    }
+
+    .register__redirect-login-button {
+      font-size: var(--desktop-text-size-m);
+      width: 18rem;
+      height: 5rem;
+      /* margin-top: 7rem; */
+    }
   }
 `;
