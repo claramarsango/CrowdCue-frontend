@@ -1,7 +1,8 @@
 import { useAppDispatch, useAppSelector } from '../../../../../app/hooks';
 import Loading from '../../../../../shared/components/Loading';
 import { checkForExistingUser, selectResponseState } from '../../auth-slice';
-import { Form, RegisterLink } from '../../authFormStyled';
+import { Form, RegisterLink } from '../../auth-form-styled';
+import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
   const responseState = useAppSelector(selectResponseState);
@@ -60,7 +61,9 @@ const LoginForm = () => {
       </Form>
       <RegisterLink className="login__register-account">
         Don’t have an account?{' '}
-        <span className="register-account__link">Register</span>
+        <Link to="/register" className="form__link">
+          <span className="register-account__link">Register</span>
+        </Link>
       </RegisterLink>
     </>
   );
