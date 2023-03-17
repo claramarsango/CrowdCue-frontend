@@ -123,6 +123,11 @@ export const RegisterLink = styled.p`
     font-weight: var(--text-semi-bold);
   }
 
+  .form__link {
+    text-decoration: none;
+    color: inherit;
+  }
+
   @media (min-width: 1440px) {
     font-size: var(--desktop-text-size-xs);
   }
