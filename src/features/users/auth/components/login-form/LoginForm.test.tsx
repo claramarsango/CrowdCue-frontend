@@ -2,7 +2,7 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { store } from '../../../../../app/store';
-import { errorHandlers, handlers } from '../../../../../mocks/handlers';
+import { errorHandlers } from '../../../../../mocks/handlers';
 import { server } from '../../../../../mocks/server';
 import LoginForm from './LoginForm';
 
@@ -11,7 +11,6 @@ describe('Given a log in form,', () => {
   afterEach(() => server.resetHandlers());
   afterAll(() => server.close());
   test('when the user logs in with an existing account, its loginState state should become success', async () => {
-    server.use(...handlers);
     render(
       <Provider store={store}>
         <MemoryRouter>
