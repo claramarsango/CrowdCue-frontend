@@ -12,6 +12,6 @@ body {
   background: var(--background-color-blue-gradient);
   background-repeat: no-repeat;
   background-position: center;
-  height: 100vh;
+  min-height: 100vh;
   color: var(--text-color-white);
 }

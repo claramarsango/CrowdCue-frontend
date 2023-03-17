@@ -10,7 +10,8 @@ export const Form = styled.form`
   }
 
   .form__email-field,
-  .form__password-field {
+  .form__password-field,
+  .form__confirm-password-field {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -18,13 +19,15 @@ export const Form = styled.form`
   }
 
   .email__title,
-  .password__title {
+  .password__title,
+  .confirm-password__title {
     text-align: left;
     font-size: var(--mobile-text-size-l);
   }
 
   .email__input,
-  .password__input {
+  .password__input,
+  .confirm-password__input {
     border: 0;
     border-bottom: 1px solid var(--text-color-white);
     color: var(--text-color-white);
@@ -80,17 +83,20 @@ export const Form = styled.form`
     }
 
     .form__email-field,
-    .form__password-field {
+    .form__password-field,
+    .form__confirm-password-field {
       gap: 2rem;
     }
 
     .email__title,
-    .password__title {
+    .password__title,
+    .confirm-password__title {
       font-size: var(--desktop-text-size-m);
     }
 
     .email__input,
-    .password__input {
+    .password__input,
+    .confirm-password__input {
       border-bottom-width: 2px;
       font-size: var(--desktop-text-size-s);
     }
@@ -110,8 +116,16 @@ export const Form = styled.form`
 `;
 
 export const RegisterLink = styled.p`
-  .register-account__link {
+  margin-bottom: 4rem;
+
+  .register-account__link,
+  .login-account__link {
     font-weight: var(--text-semi-bold);
+  }
+
+  .form__link {
+    text-decoration: none;
+    color: inherit;
   }
 
   @media (min-width: 1440px) {

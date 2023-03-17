@@ -1,17 +1,29 @@
-import { UserCredentials } from '../../../models/user-model';
+import {
+  UserLoginCredentials,
+  UserRegisterCredentials,
+} from '../../../models/user-model';
 
-const logInUser = async (userToLog: UserCredentials) => {
+export const registerUser = async (userToRegister: UserRegisterCredentials) => {
   const response = await fetch(
-    'https://clara-marsango-final-project-back-202301.onrender.com/auth/login',
+    `${process.env.REACT_APP_API_URL}auth/register`,
     {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(userToLog),
+      body: JSON.stringify(userToRegister),
     },
   );
   return response;
 };
 
-export default logInUser;
+export const logInUser = async (userToLog: UserLoginCredentials) => {
+  const response = await fetch(`${process.env.REACT_APP_API_URL}auth/login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(userToLog),
+  });
+  return response;
+};
