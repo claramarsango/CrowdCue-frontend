@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { createSessionResponse } from '../../models/session-model';
+import { CreateSessionResponse } from '../../models/session-model';
 import { createSession } from './sessions-api';
 
 export interface SessionFormState {
@@ -21,7 +21,7 @@ export const createSessionAsync = createAsyncThunk(
     const formData = new FormData(sessionForm);
 
     const response = await createSession(formData);
-    const apiRes: createSessionResponse = await response.json();
+    const apiRes: CreateSessionResponse = await response.json();
 
     if (!response.ok) {
       throw new Error(apiRes.msg);
