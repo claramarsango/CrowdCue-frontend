@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '../../../../../app/hooks';
 import Loading from '../../../../../shared/components/Loading';
 import { checkForExistingUser, selectResponseState } from '../../auth-slice';
-import { Form, RegisterLink } from '../../auth-form-styled';
+import { AuthForm, RegisterLink } from '../../auth-form-styled';
 import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
@@ -11,7 +11,7 @@ const LoginForm = () => {
 
   return (
     <>
-      <Form
+      <AuthForm
         onSubmit={event => {
           event.preventDefault();
           dispatch(checkForExistingUser(event.currentTarget));
@@ -58,7 +58,7 @@ const LoginForm = () => {
             {status !== 'loading' ? <span>Sign in</span> : <Loading />}
           </span>
         </button>
-      </Form>
+      </AuthForm>
       <RegisterLink className="login__register-account">
         Don’t have an account?{' '}
         <Link to="/register" className="form__link">
