@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Form = styled.form`
+export const AuthForm = styled.form`
   margin: 2rem 3rem 1rem;
 
   .form__inputs {

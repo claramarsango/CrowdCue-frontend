@@ -3,7 +3,7 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { useAppDispatch, useAppSelector } from '../../../../../app/hooks';
 import Loading from '../../../../../shared/components/Loading';
 import { checkForRegisteredUser, selectResponseState } from '../../auth-slice';
-import { Form, RegisterLink } from '../../auth-form-styled';
+import { AuthForm, RegisterLink } from '../../auth-form-styled';
 import { AuthUserFeedback } from './register-form-styled';
 import { Link } from 'react-router-dom';
 
@@ -32,7 +32,7 @@ const RegisterForm = () => {
     } else {
       return (
         <>
-          <Form
+          <AuthForm
             onSubmit={event => {
               event.preventDefault();
               dispatch(checkForRegisteredUser(event.currentTarget));
@@ -96,7 +96,7 @@ const RegisterForm = () => {
                 {status !== 'loading' ? <span>Sign up</span> : <Loading />}
               </span>
             </button>
-          </Form>
+          </AuthForm>
           <RegisterLink>
             Already have an account?{' '}
             <Link to="/login" className="form__link">
