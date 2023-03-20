@@ -16,7 +16,7 @@ export type sessionResponse = Omit<Session, 'currentSong'>;
 
 export type createSessionInput = Pick<Session, 'title' | 'coverImageURL'>;
 
-export interface createSessionResponse {
+export interface CreateSessionResponse {
   msg: string;
   session: sessionResponse;
 }
