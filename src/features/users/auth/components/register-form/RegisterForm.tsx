@@ -93,7 +93,11 @@ const RegisterForm = () => {
 
             <button className="form__submit-button" type="submit">
               <span className="button__text">
-                {status !== 'loading' ? <span>Sign up</span> : <Loading />}
+                {status !== 'loading' ? (
+                  <span>Sign up</span>
+                ) : (
+                  <Loading container="button" />
+                )}
               </span>
             </button>
           </AuthForm>

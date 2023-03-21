@@ -55,7 +55,11 @@ const LoginForm = () => {
 
         <button className="form__submit-button" type="submit">
           <span className="button__text">
-            {status !== 'loading' ? <span>Sign in</span> : <Loading />}
+            {status !== 'loading' ? (
+              <span>Sign in</span>
+            ) : (
+              <Loading container="button" />
+            )}
           </span>
         </button>
       </AuthForm>
