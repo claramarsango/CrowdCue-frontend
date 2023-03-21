@@ -14,7 +14,7 @@ describe('Given an explore page,', () => {
       </Provider>,
     );
 
-    const pageTitle = screen.getByRole('heading');
-    expect(pageTitle).toBeInTheDocument();
+    const pageTitle = screen.getAllByRole('heading');
+    expect(pageTitle[0]).toBeInTheDocument();
   });
 });
