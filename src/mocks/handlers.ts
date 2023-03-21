@@ -13,6 +13,25 @@ export const handlers = [
       );
     },
   ),
+  rest.get(
+    `${process.env.REACT_APP_API_URL}api/v1/sessions/explore`,
+    (_req, res, ctx) => {
+      return res(
+        ctx.status(200),
+        ctx.json([
+          {
+            title: 'mockSession',
+            coverImageURL: '',
+            url: '',
+            queuedSongs: [],
+            admin: '',
+            participants: [],
+            _id: 123,
+          },
+        ]),
+      );
+    },
+  ),
 ];
 
 export const errorHandlers = [
@@ -26,11 +45,17 @@ export const errorHandlers = [
   }),
   rest.post(
     `${process.env.REACT_APP_API_URL}auth/register`,
-    async (req, res, ctx) => {
+    (req, res, ctx) => {
       return res.once(
         ctx.status(400),
         ctx.json({ msg: '"email" must be valid email' }),
       );
+    },
+  ),
+  rest.get(
+    `${process.env.REACT_APP_API_URL}api/v1/sessions/explore`,
+    (_req, res, ctx) => {
+      return res.once(ctx.status(401), ctx.json({ msg: 'Unauthorized' }));
     },
   ),
 ];
