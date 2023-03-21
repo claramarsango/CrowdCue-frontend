@@ -1,18 +1,25 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { CreateSessionResponse } from '../../models/session-model';
-import { createSession } from './sessions-api';
+import {
+  AllSessionsResponse,
+  CreateSessionResponse,
+  sessionResponse,
+} from '../../models/session-model';
+import { createSession, getAllSessions } from './sessions-api';
 
-export interface SessionFormState {
+type apiResponseState = 'idle' | 'success' | 'error';
+export interface SessionState {
   status: 'idle' | 'loading' | 'failed';
-  createSessionState: 'idle' | 'success' | 'error';
+  createSessionState: apiResponseState;
   createSessionMsg: string;
+  previewSessions: sessionResponse[];
 }
 
-const initialState: SessionFormState = {
+const initialState: SessionState = {
   status: 'idle',
   createSessionState: 'idle',
   createSessionMsg: '',
+  previewSessions: [],
 };
 
 export const createSessionAsync = createAsyncThunk(
@@ -31,8 +38,23 @@ export const createSessionAsync = createAsyncThunk(
   },
 );
 
-export const sessionFormSlice = createSlice({
-  name: 'sessionForm',
+export const getSessionsAsync = createAsyncThunk(
+  'getSessionsList/fetch',
+  async () => {
+    const response = await getAllSessions();
+
+    const apiRes: AllSessionsResponse = await response.json();
+
+    if (!response.ok) {
+      throw new Error(apiRes.msg);
+    }
+
+    return apiRes;
+  },
+);
+
+export const sessionComponentSlice = createSlice({
+  name: 'sessionComponent',
   initialState,
   reducers: {},
 
@@ -50,10 +72,21 @@ export const sessionFormSlice = createSlice({
         state.status = 'failed';
         state.createSessionState = 'error';
         state.createSessionMsg = action.error.message;
+      })
+
+      .addCase(getSessionsAsync.pending, state => {
+        state.status = 'loading';
+      })
+      .addCase(getSessionsAsync.fulfilled, (state, action: any) => {
+        state.status = 'idle';
+        state.previewSessions = action.payload;
+      })
+      .addCase(getSessionsAsync.rejected, state => {
+        state.status = 'failed';
       });
   },
 });
 
-export const selectSubmitState = (state: RootState) => state.sessionForm;
+export const selectSessionState = (state: RootState) => state.sessionComponent;
 
-export default sessionFormSlice.reducer;
+export default sessionComponentSlice.reducer;
