@@ -19,4 +19,15 @@ export const SessionCardContainer = styled.li`
     overflow: hidden;
     white-space: nowrap;
   }
+
+  @media (min-width: 1440px) {
+    width: 17rem;
+    gap: 1rem;
+    font-size: var(--desktop-text-size-xs);
+
+    .session-card__cover {
+      width: 17rem;
+      height: 17rem;
+    }
+  }
 `;
