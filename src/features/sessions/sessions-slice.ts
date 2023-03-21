@@ -11,14 +11,14 @@ type apiResponseState = 'idle' | 'success' | 'error';
 export interface SessionState {
   status: 'idle' | 'loading' | 'failed';
   createSessionState: apiResponseState;
-  createSessionMsg: string;
+  sessionMsg: string;
   previewSessions: sessionResponse[];
 }
 
 const initialState: SessionState = {
   status: 'idle',
   createSessionState: 'idle',
-  createSessionMsg: '',
+  sessionMsg: '',
   previewSessions: [],
 };
 
@@ -71,7 +71,7 @@ export const sessionComponentSlice = createSlice({
       .addCase(createSessionAsync.rejected, (state, action: any) => {
         state.status = 'failed';
         state.createSessionState = 'error';
-        state.createSessionMsg = action.error.message;
+        state.sessionMsg = action.error.message;
       })
 
       .addCase(getSessionsAsync.pending, state => {
@@ -81,8 +81,9 @@ export const sessionComponentSlice = createSlice({
         state.status = 'idle';
         state.previewSessions = action.payload;
       })
-      .addCase(getSessionsAsync.rejected, state => {
+      .addCase(getSessionsAsync.rejected, (state, action: any) => {
         state.status = 'failed';
+        state.sessionMsg = action.error.message;
       });
   },
 });

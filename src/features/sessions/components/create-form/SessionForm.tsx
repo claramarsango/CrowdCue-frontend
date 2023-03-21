@@ -4,7 +4,7 @@ import { CreateSessionForm } from './session-form-styled';
 
 const SessionForm = () => {
   const submitState = useAppSelector(selectSessionState);
-  const { createSessionState, createSessionMsg } = submitState;
+  const { createSessionState, sessionMsg: createSessionMsg } = submitState;
   const dispatch = useAppDispatch();
 
   return (
