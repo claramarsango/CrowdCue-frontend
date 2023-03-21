@@ -1,10 +1,15 @@
 import styled from 'styled-components';
 
-export const LoadingSpinner = styled.span`
+interface LoadingSpinnerProps {
+  container: string;
+}
+
+export const LoadingSpinner = styled.span<LoadingSpinnerProps>`
   .spinner {
-    margin: auto;
-    width: 2rem;
-    height: 2rem;
+    margin: ${props =>
+      props.container === 'button' ? '0 auto' : '6rem auto 1rem'};
+    width: ${props => (props.container === 'button' ? '2' : '9')}rem;
+    height: ${props => (props.container === 'button' ? '2' : '9')}rem;
     border-radius: 100%;
     animation: spin 1.5s linear infinite;
     background: conic-gradient(
@@ -16,16 +21,6 @@ export const LoadingSpinner = styled.span`
       rgba(166, 177, 188, 0) 340.66deg,
       rgba(166, 177, 188, 0) 447.5deg
     );
-  }
-
-  .spinner::after {
-    content: '';
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    width: 1.5rem;
-    height: 1.5rem;
-    border-radius: 100%;
   }
 
   @keyframes spin {

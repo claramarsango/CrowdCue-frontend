@@ -1,10 +1,16 @@
+import { FC } from 'react';
 import { LoadingSpinner } from './LoadingStyled';
 
-const Loading = () => {
+interface LoadingProps {
+  container: string;
+}
+const Loading: FC<LoadingProps> = ({ container }) => {
   return (
-    <LoadingSpinner>
-      <div className="spinner" data-testid="loading-spinner"></div>
-    </LoadingSpinner>
+    <>
+      <LoadingSpinner container={container}>
+        <div className="spinner" data-testid="loading-spinner"></div>
+      </LoadingSpinner>
+    </>
   );
 };
 
