@@ -1,9 +1,9 @@
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
-import { createSessionAsync, selectSubmitState } from '../../sessions-slice';
+import { createSessionAsync, selectSessionState } from '../../sessions-slice';
 import { CreateSessionForm } from './session-form-styled';
 
 const SessionForm = () => {
-  const submitState = useAppSelector(selectSubmitState);
+  const submitState = useAppSelector(selectSessionState);
   const { createSessionState, createSessionMsg } = submitState;
   const dispatch = useAppDispatch();
 
