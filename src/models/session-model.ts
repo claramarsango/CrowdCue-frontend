@@ -20,3 +20,8 @@ export interface CreateSessionResponse {
   msg: string;
   session: sessionResponse;
 }
+
+export interface AllSessionsResponse {
+  msg: string;
+  sessions: sessionResponse[];
+}
