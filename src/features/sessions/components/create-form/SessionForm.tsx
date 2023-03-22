@@ -1,10 +1,15 @@
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
-import { createSessionAsync, selectSessionState } from '../../sessions-slice';
+import {
+  createSessionAsync,
+  getSessionDetailAsync,
+  selectSessionState,
+} from '../../sessions-slice';
 import { CreateSessionForm } from './session-form-styled';
 
 const SessionForm = () => {
   const submitState = useAppSelector(selectSessionState);
-  const { createSessionState, sessionMsg: createSessionMsg } = submitState;
+  const { createSessionState, sessionMsg } = submitState;
   const dispatch = useAppDispatch();
 
   return (
@@ -49,7 +54,7 @@ const SessionForm = () => {
               }`}
               role="paragraph"
             >
-              {createSessionMsg}
+              {sessionMsg}
             </p>
           </div>
         </div>
