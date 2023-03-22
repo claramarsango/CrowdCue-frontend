@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { useAppDispatch, useAppSelector } from '../../../../../app/hooks';
-import Loading from '../../../../../shared/components/Loading';
+import Loading from '../../../../../shared/components/loading/Loading';
 import { checkForRegisteredUser, selectResponseState } from '../../auth-slice';
 import { AuthForm, RegisterLink } from '../../auth-form-styled';
 import { AuthUserFeedback } from './register-form-styled';
