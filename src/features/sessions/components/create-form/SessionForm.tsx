@@ -1,10 +1,5 @@
-import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
-import {
-  createSessionAsync,
-  getSessionDetailAsync,
-  selectSessionState,
-} from '../../sessions-slice';
+import { createSessionAsync, selectSessionState } from '../../sessions-slice';
 import { CreateSessionForm } from './session-form-styled';
 
 const SessionForm = () => {
