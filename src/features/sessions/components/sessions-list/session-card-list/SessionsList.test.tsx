@@ -1,5 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
+import { MemoryRouter } from 'react-router-dom';
 import { store } from '../../../../../app/store';
 import { errorHandlers } from '../../../../../mocks/handlers';
 import { server } from '../../../../../mocks/server';
@@ -14,7 +15,9 @@ describe('Given a session list component,', () => {
     server.use(...errorHandlers);
     render(
       <Provider store={store}>
-        <SessionsList />
+        <MemoryRouter>
+          <SessionsList />
+        </MemoryRouter>
       </Provider>,
     );
 
@@ -25,13 +28,15 @@ describe('Given a session list component,', () => {
   test('when the page loads, it should show a list of sessions', async () => {
     render(
       <Provider store={store}>
-        <SessionsList />
+        <MemoryRouter>
+          <SessionsList />
+        </MemoryRouter>
       </Provider>,
     );
 
     await waitFor(() => {
-      const listitem = screen.getAllByRole('listitem');
-      expect(listitem.length).toBe(1);
+      const listItem = screen.getAllByRole('listitem');
+      expect(listItem.length).toBe(1);
     });
   });
 });
