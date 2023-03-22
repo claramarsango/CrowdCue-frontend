@@ -24,7 +24,7 @@ const RegisterForm = () => {
           <h2 className="register__success-message">
             User registered successfully!
           </h2>
-          <Link to="/login">
+          <Link to="/auth/login">
             <button className="register__redirect-login-button">Log in</button>
           </Link>
         </AuthUserFeedback>
@@ -103,7 +103,7 @@ const RegisterForm = () => {
           </AuthForm>
           <RegisterLink>
             Already have an account?{' '}
-            <Link to="/login" className="form__link">
+            <Link to="/auth/login" className="form__link">
               <span className="login-account__link">Log in</span>
             </Link>
           </RegisterLink>
