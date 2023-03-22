@@ -25,3 +25,16 @@ export const getAllSessions = async () => {
 
   return response;
 };
+
+export const getSessionById = async (id: string) => {
+  const response = await fetch(
+    `${process.env.REACT_APP_API_URL}api/v1/sessions/${id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem('Bearer')}`,
+      },
+    },
+  );
+
+  return response;
+};
