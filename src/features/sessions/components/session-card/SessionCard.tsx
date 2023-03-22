@@ -11,7 +11,7 @@ const SessionCard: FC<SessionCardProps> = ({ session }) => {
 
   return (
     <>
-      <Link to={`sessions/${_id}`}>
+      <Link to={`sessions/${_id}`} className="session-card-link">
         <img
           src={coverImageURL}
           alt={`${title} cover`}
