@@ -5,6 +5,7 @@ import CreateSession from '../pages/CreateSession/CreateSession';
 import ExploreSessions from '../pages/ExploreSessions/ExploreSessions';
 import Login from '../pages/Login/Login';
 import Register from '../pages/Register/Register';
+import SessionDetail from '../pages/SessionDetail/SessionDetail';
 
 export const router = createBrowserRouter([
   {
@@ -13,6 +14,7 @@ export const router = createBrowserRouter([
     children: [
       { path: '', element: <ExploreSessions /> },
       { path: 'sessions', element: <CreateSession /> },
+      { path: 'sessions/:_id', element: <SessionDetail /> },
     ],
   },
   {
