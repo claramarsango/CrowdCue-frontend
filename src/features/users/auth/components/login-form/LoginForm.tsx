@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../../../../../app/hooks';
-import Loading from '../../../../../shared/components/Loading';
+import Loading from '../../../../../shared/components/loading/Loading';
 import { checkForExistingUser, selectResponseState } from '../../auth-slice';
 import { AuthForm, RegisterLink } from '../../auth-form-styled';
 import { Link } from 'react-router-dom';
@@ -65,7 +65,7 @@ const LoginForm = () => {
       </AuthForm>
       <RegisterLink className="login__register-account">
         Don’t have an account?{' '}
-        <Link to="/register" className="form__link">
+        <Link to="/auth/register" className="form__link">
           <span className="register-account__link">Register</span>
         </Link>
       </RegisterLink>

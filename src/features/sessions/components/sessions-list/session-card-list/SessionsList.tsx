@@ -1,17 +1,16 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../../app/hooks';
 import { sessionResponse } from '../../../../../models/session-model';
-import Loading from '../../../../../shared/components/Loading';
+import Loading from '../../../../../shared/components/loading/Loading';
 import { getSessionsAsync, selectSessionState } from '../../../sessions-slice';
 import { SessionCardContainer } from '../../session-card/session-card-styled';
 import SessionCard from '../../session-card/SessionCard';
-import { ListFeedback, SessionsListContainer } from './session-list-styled';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { SessionsListContainer } from './session-list-styled';
+import ErrorFeedback from '../../../../../shared/components/error-feedback/ErrorFeedback';
 
 const SessionsList = () => {
   const sessionListState = useAppSelector(selectSessionState);
-  const { status, previewSessions, sessionMsg } = sessionListState;
+  const { status, previewSessions } = sessionListState;
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -28,21 +27,13 @@ const SessionsList = () => {
           </>
         );
       case 'failed':
-        return (
-          <ListFeedback>
-            <FontAwesomeIcon
-              icon={solid('circle-exclamation')}
-              className="error-icon"
-            />
-            <h3 className="error-message">{sessionMsg}</h3>
-          </ListFeedback>
-        );
+        return <ErrorFeedback />;
       default:
         return (
           <SessionsListContainer>
             {previewSessions.map((session: sessionResponse) => (
               <SessionCardContainer key={`session-id-${session._id}`}>
-                <SessionCard session={session} />
+                <SessionCard session={session} data-testid="session-card" />
               </SessionCardContainer>
             ))}
           </SessionsListContainer>

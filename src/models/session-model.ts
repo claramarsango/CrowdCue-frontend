@@ -25,3 +25,8 @@ export interface AllSessionsResponse {
   msg: string;
   sessions: sessionResponse[];
 }
+
+export interface SessionDetailResponse {
+  msg: string;
+  session: Session;
+}

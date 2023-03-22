@@ -32,6 +32,23 @@ export const handlers = [
       );
     },
   ),
+  rest.get(
+    `${process.env.REACT_APP_API_URL}api/v1/sessions/1234`,
+    (_req, res, ctx) => {
+      return res(
+        ctx.status(200),
+        ctx.json({
+          title: 'mockSessionById',
+          coverImageURL: '',
+          url: '',
+          queuedSongs: [],
+          admin: '',
+          participants: [],
+          _id: 1234,
+        }),
+      );
+    },
+  ),
 ];
 
 export const errorHandlers = [
@@ -56,6 +73,15 @@ export const errorHandlers = [
     `${process.env.REACT_APP_API_URL}api/v1/sessions/explore`,
     (_req, res, ctx) => {
       return res.once(ctx.status(401), ctx.json({ msg: 'Unauthorized' }));
+    },
+  ),
+  rest.get(
+    `${process.env.REACT_APP_API_URL}api/v1/sessions/123456789123456789123456`,
+    (_req, res, ctx) => {
+      return res.once(
+        ctx.status(404),
+        ctx.json({ msg: 'This session does not exist' }),
+      );
     },
   ),
 ];

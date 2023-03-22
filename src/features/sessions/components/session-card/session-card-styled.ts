@@ -7,6 +7,11 @@ export const SessionCardContainer = styled.li`
   flex-direction: column;
   gap: 0.75rem;
 
+  .session-card-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
   .session-card__cover {
     width: 9rem;
     height: 9rem;

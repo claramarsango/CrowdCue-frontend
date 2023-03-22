@@ -4,7 +4,7 @@ import { CreateSessionForm } from './session-form-styled';
 
 const SessionForm = () => {
   const submitState = useAppSelector(selectSessionState);
-  const { createSessionState, sessionMsg: createSessionMsg } = submitState;
+  const { createSessionState, sessionMsg } = submitState;
   const dispatch = useAppDispatch();
 
   return (
@@ -49,7 +49,7 @@ const SessionForm = () => {
               }`}
               role="paragraph"
             >
-              {createSessionMsg}
+              {sessionMsg}
             </p>
           </div>
         </div>
