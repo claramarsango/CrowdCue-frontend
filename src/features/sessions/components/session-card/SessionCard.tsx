@@ -17,7 +17,9 @@ const SessionCard: FC<SessionCardProps> = ({ session }) => {
           alt={`${title} cover`}
           className="session-card__cover"
         />
-        <p className="session-card__title">{title}</p>
+        <p className="session-card__title" role="paragraph">
+          {title}
+        </p>
       </Link>
     </>
   );
