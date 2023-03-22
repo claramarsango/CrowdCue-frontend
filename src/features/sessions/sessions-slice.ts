@@ -3,9 +3,11 @@ import { RootState } from '../../app/store';
 import {
   AllSessionsResponse,
   CreateSessionResponse,
+  Session,
+  SessionDetailResponse,
   sessionResponse,
 } from '../../models/session-model';
-import { createSession, getAllSessions } from './sessions-api';
+import { createSession, getAllSessions, getSessionById } from './sessions-api';
 
 type apiResponseState = 'idle' | 'success' | 'error';
 export interface SessionState {
@@ -13,6 +15,7 @@ export interface SessionState {
   createSessionState: apiResponseState;
   sessionMsg: string;
   previewSessions: sessionResponse[];
+  session: Session;
 }
 
 const initialState: SessionState = {
@@ -20,6 +23,16 @@ const initialState: SessionState = {
   createSessionState: 'idle',
   sessionMsg: '',
   previewSessions: [],
+  session: {
+    title: '',
+    coverImageURL: '',
+    url: '',
+    currentSong: '',
+    queuedSongs: [],
+    admin: { id: 0, email: '', password: '', imageURL: '', inSession: '' },
+    participants: [],
+    _id: 0,
+  },
 };
 
 export const createSessionAsync = createAsyncThunk(
@@ -44,6 +57,21 @@ export const getSessionsAsync = createAsyncThunk(
     const response = await getAllSessions();
 
     const apiRes: AllSessionsResponse = await response.json();
+
+    if (!response.ok) {
+      throw new Error(apiRes.msg);
+    }
+
+    return apiRes;
+  },
+);
+
+export const getSessionDetailAsync = createAsyncThunk(
+  'getSessionDetail/fetch',
+  async (id: string) => {
+    const response = await getSessionById(id);
+
+    const apiRes: SessionDetailResponse = await response.json();
 
     if (!response.ok) {
       throw new Error(apiRes.msg);
@@ -82,6 +110,18 @@ export const sessionComponentSlice = createSlice({
         state.previewSessions = action.payload;
       })
       .addCase(getSessionsAsync.rejected, (state, action: any) => {
+        state.status = 'failed';
+        state.sessionMsg = action.error.message;
+      })
+
+      .addCase(getSessionDetailAsync.pending, state => {
+        state.status = 'loading';
+      })
+      .addCase(getSessionDetailAsync.fulfilled, (state, action: any) => {
+        state.status = 'idle';
+        state.session = action.payload;
+      })
+      .addCase(getSessionDetailAsync.rejected, (state, action: any) => {
         state.status = 'failed';
         state.sessionMsg = action.error.message;
       });
