@@ -1,8 +1,10 @@
 import { FC, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import ErrorFeedback from '../../../../shared/components/error-feedback/ErrorFeedback';
 import Loading from '../../../../shared/components/loading/Loading';
 import {
+  deleteSessionAsync,
   getSessionDetailAsync,
   selectSessionState,
 } from '../../sessions-slice';
@@ -18,10 +20,16 @@ const SessionControls: FC<SessionControlsProps> = ({ sessionId }) => {
   const { session, status } = sessionDetailState;
   const { title, participants } = session;
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getSessionDetailAsync(sessionId));
   }, [dispatch, sessionId]);
+
+  const handleDeleteClick = () => {
+    dispatch(deleteSessionAsync(sessionId));
+    navigate('/');
+  };
 
   const generateSessionDetail = () => {
     switch (status) {
@@ -58,7 +66,9 @@ const SessionControls: FC<SessionControlsProps> = ({ sessionId }) => {
               <div className="control-buttons">
                 <button className="buttons__search">Search</button>
                 <button className="buttons__queue">Queue</button>
-                <button className="buttons__quit">Leave session</button>
+                <button className="buttons__quit" onClick={handleDeleteClick}>
+                  End session
+                </button>
               </div>
             </SessionControlsStyled>
           </>
