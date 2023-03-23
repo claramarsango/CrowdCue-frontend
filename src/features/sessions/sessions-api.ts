@@ -38,3 +38,17 @@ export const getSessionById = async (id: string) => {
 
   return response;
 };
+
+export const deleteSessionById = async (id: string) => {
+  const response = await fetch(
+    `${process.env.REACT_APP_API_URL}api/v1/sessions/${id}`,
+    {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem('Bearer')}`,
+      },
+    },
+  );
+
+  return response;
+};
