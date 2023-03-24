@@ -7,7 +7,7 @@ export interface Session {
   url: string;
   currentSong: Song | string;
   queuedSongs: Song[];
-  admin: User;
+  admin: string;
   participants: User[];
   _id: number;
 }
