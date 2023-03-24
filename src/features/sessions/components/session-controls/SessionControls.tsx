@@ -1,14 +1,14 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import ErrorFeedback from '../../../../shared/components/error-feedback/ErrorFeedback';
 import Loading from '../../../../shared/components/loading/Loading';
 import {
-  deleteSessionAsync,
   getSessionDetailAsync,
   selectSessionState,
 } from '../../sessions-slice';
 import { SectionTitle } from '../create-form/session-form-styled';
+import Modal from '../modal/Modal';
 import { SessionControlsStyled } from './session-controls-styled';
 
 interface SessionControlsProps {
@@ -16,20 +16,23 @@ interface SessionControlsProps {
 }
 
 const SessionControls: FC<SessionControlsProps> = ({ sessionId }) => {
-  const sessionDetailState = useAppSelector(selectSessionState);
-  const { session, status } = sessionDetailState;
-  const { title, participants } = session;
   const dispatch = useAppDispatch();
+  const sessionDetailState = useAppSelector(selectSessionState);
+
   const navigate = useNavigate();
+
+  const { session, status, deleteStatus } = sessionDetailState;
+  const { title, participants, admin } = session;
+
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     dispatch(getSessionDetailAsync(sessionId));
   }, [dispatch, sessionId]);
 
-  const handleDeleteClick = () => {
-    dispatch(deleteSessionAsync(sessionId));
-    navigate('/');
-  };
+  useEffect(() => {
+    if (deleteStatus === 'success') navigate('/');
+  }, [deleteStatus, navigate]);
 
   const generateSessionDetail = () => {
     switch (status) {
@@ -66,8 +69,15 @@ const SessionControls: FC<SessionControlsProps> = ({ sessionId }) => {
               <div className="control-buttons">
                 <button className="buttons__search">Search</button>
                 <button className="buttons__queue">Queue</button>
-                <button className="buttons__quit" onClick={handleDeleteClick}>
-                  End session
+                <button
+                  className="buttons__quit"
+                  onClick={() => {
+                    setIsOpen(true);
+                  }}
+                >
+                  {sessionStorage.getItem('User ID') === admin
+                    ? 'End session'
+                    : 'Leave session'}
                 </button>
               </div>
             </SessionControlsStyled>
@@ -76,7 +86,12 @@ const SessionControls: FC<SessionControlsProps> = ({ sessionId }) => {
     }
   };
 
-  return <>{generateSessionDetail()}</>;
+  return (
+    <>
+      {isOpen && <Modal setIsOpen={setIsOpen} sessionId={sessionId} />}
+      {generateSessionDetail()}
+    </>
+  );
 };
 
 export default SessionControls;
