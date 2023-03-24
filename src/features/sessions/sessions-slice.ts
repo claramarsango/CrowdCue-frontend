@@ -21,6 +21,7 @@ export interface SessionState {
   sessionMsg: string;
   previewSessions: sessionResponse[];
   session: Session;
+  deleteStatus: apiResponseState;
 }
 
 const initialState: SessionState = {
@@ -34,10 +35,11 @@ const initialState: SessionState = {
     url: '',
     currentSong: '',
     queuedSongs: [],
-    admin: { id: 0, email: '', password: '', imageURL: '', inSession: '' },
+    admin: '',
     participants: [],
     _id: 0,
   },
+  deleteStatus: 'idle',
 };
 
 export const createSessionAsync = createAsyncThunk(
@@ -104,7 +106,11 @@ export const deleteSessionAsync = createAsyncThunk(
 export const sessionComponentSlice = createSlice({
   name: 'sessionComponent',
   initialState,
-  reducers: {},
+  reducers: {
+    restoreDeleteStatus: state => {
+      state.deleteStatus = 'idle';
+    },
+  },
 
   extraReducers: builder => {
     builder
@@ -151,7 +157,8 @@ export const sessionComponentSlice = createSlice({
       })
       .addCase(deleteSessionAsync.fulfilled, (state, action: any) => {
         state.status = 'idle';
-        state.session = action.payload;
+        state.sessionMsg = action.payload;
+        state.deleteStatus = 'success';
       })
       .addCase(deleteSessionAsync.rejected, (state, action: any) => {
         state.status = 'failed';
@@ -161,5 +168,6 @@ export const sessionComponentSlice = createSlice({
 });
 
 export const selectSessionState = (state: RootState) => state.sessionComponent;
+export const { restoreDeleteStatus } = sessionComponentSlice.actions;
 
 export default sessionComponentSlice.reducer;
