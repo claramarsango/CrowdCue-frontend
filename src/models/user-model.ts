@@ -15,4 +15,5 @@ export type UserRegisterCredentials =
 export interface AuthResponse {
   msg: string;
   accessToken: string;
+  userId: string;
 }
