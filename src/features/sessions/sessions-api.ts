@@ -1,10 +1,10 @@
 export const createSession = async (sessionInfo: FormData) => {
   const response = await fetch(
-    `${process.env.REACT_APP_API_URL}api/v1/sessions/create`,
+    `${process.env.REACT_APP_API_URL}api/v1/sessions`,
     {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${sessionStorage.getItem('Bearer')}`,
+        Authorization: `Bearer ${sessionStorage.getItem('Access Token')}`,
       },
       body: sessionInfo,
     },
@@ -18,7 +18,7 @@ export const getAllSessions = async () => {
     `${process.env.REACT_APP_API_URL}api/v1/sessions/explore`,
     {
       headers: {
-        Authorization: `Bearer ${sessionStorage.getItem('Bearer')}`,
+        Authorization: `Bearer ${sessionStorage.getItem('Access Token')}`,
       },
     },
   );
@@ -31,7 +31,7 @@ export const getSessionById = async (id: string) => {
     `${process.env.REACT_APP_API_URL}api/v1/sessions/${id}`,
     {
       headers: {
-        Authorization: `Bearer ${sessionStorage.getItem('Bearer')}`,
+        Authorization: `Bearer ${sessionStorage.getItem('Access Token')}`,
       },
     },
   );
@@ -45,7 +45,7 @@ export const deleteSessionById = async (id: string) => {
     {
       method: 'DELETE',
       headers: {
-        Authorization: `Bearer ${sessionStorage.getItem('Bearer')}`,
+        Authorization: `Bearer ${sessionStorage.getItem('Access Token')}`,
       },
     },
   );
