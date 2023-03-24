@@ -2,7 +2,11 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../../app/hooks';
 import { sessionResponse } from '../../../../../models/session-model';
 import Loading from '../../../../../shared/components/loading/Loading';
-import { getSessionsAsync, selectSessionState } from '../../../sessions-slice';
+import {
+  getSessionsAsync,
+  selectSessionState,
+  restoreDeleteStatus,
+} from '../../../sessions-slice';
 import { SessionCardContainer } from '../../session-card/session-card-styled';
 import SessionCard from '../../session-card/SessionCard';
 import { SessionsListContainer } from './session-list-styled';
@@ -14,6 +18,7 @@ const SessionsList = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    dispatch(restoreDeleteStatus());
     dispatch(getSessionsAsync());
   }, [dispatch]);
 

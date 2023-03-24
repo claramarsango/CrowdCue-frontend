@@ -7,7 +7,12 @@ import {
   SessionDetailResponse,
   sessionResponse,
 } from '../../models/session-model';
-import { createSession, getAllSessions, getSessionById } from './sessions-api';
+import {
+  createSession,
+  deleteSessionById,
+  getAllSessions,
+  getSessionById,
+} from './sessions-api';
 
 type apiResponseState = 'idle' | 'success' | 'error';
 export interface SessionState {
@@ -16,6 +21,7 @@ export interface SessionState {
   sessionMsg: string;
   previewSessions: sessionResponse[];
   session: Session;
+  deleteStatus: apiResponseState;
 }
 
 const initialState: SessionState = {
@@ -29,10 +35,11 @@ const initialState: SessionState = {
     url: '',
     currentSong: '',
     queuedSongs: [],
-    admin: { id: 0, email: '', password: '', imageURL: '', inSession: '' },
+    admin: '',
     participants: [],
     _id: 0,
   },
+  deleteStatus: 'idle',
 };
 
 export const createSessionAsync = createAsyncThunk(
@@ -81,10 +88,29 @@ export const getSessionDetailAsync = createAsyncThunk(
   },
 );
 
+export const deleteSessionAsync = createAsyncThunk(
+  'deleteSession/fetch',
+  async (id: string) => {
+    const response = await deleteSessionById(id);
+
+    const apiRes: { msg: string } = await response.json();
+
+    if (!response.ok) {
+      throw new Error(apiRes.msg);
+    }
+
+    return apiRes;
+  },
+);
+
 export const sessionComponentSlice = createSlice({
   name: 'sessionComponent',
   initialState,
-  reducers: {},
+  reducers: {
+    restoreDeleteStatus: state => {
+      state.deleteStatus = 'idle';
+    },
+  },
 
   extraReducers: builder => {
     builder
@@ -124,10 +150,24 @@ export const sessionComponentSlice = createSlice({
       .addCase(getSessionDetailAsync.rejected, (state, action: any) => {
         state.status = 'failed';
         state.sessionMsg = action.error.message;
+      })
+
+      .addCase(deleteSessionAsync.pending, state => {
+        state.status = 'loading';
+      })
+      .addCase(deleteSessionAsync.fulfilled, (state, action: any) => {
+        state.status = 'idle';
+        state.sessionMsg = action.payload;
+        state.deleteStatus = 'success';
+      })
+      .addCase(deleteSessionAsync.rejected, (state, action: any) => {
+        state.status = 'failed';
+        state.sessionMsg = action.error.message;
       });
   },
 });
 
 export const selectSessionState = (state: RootState) => state.sessionComponent;
+export const { restoreDeleteStatus } = sessionComponentSlice.actions;
 
 export default sessionComponentSlice.reducer;

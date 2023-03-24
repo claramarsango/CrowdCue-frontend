@@ -49,6 +49,15 @@ export const handlers = [
       );
     },
   ),
+  rest.delete(
+    `${process.env.REACT_APP_API_URL}api/v1/sessions/1234`,
+    (_req, res, ctx) => {
+      return res(
+        ctx.status(200),
+        ctx.json({ msg: 'The session has been deleted' }),
+      );
+    },
+  ),
 ];
 
 export const errorHandlers = [
@@ -77,6 +86,15 @@ export const errorHandlers = [
   ),
   rest.get(
     `${process.env.REACT_APP_API_URL}api/v1/sessions/123456789123456789123456`,
+    (_req, res, ctx) => {
+      return res.once(
+        ctx.status(404),
+        ctx.json({ msg: 'This session does not exist' }),
+      );
+    },
+  ),
+  rest.delete(
+    `${process.env.REACT_APP_API_URL}api/v1/sessions/123456789123456789123457`,
     (_req, res, ctx) => {
       return res.once(
         ctx.status(404),
