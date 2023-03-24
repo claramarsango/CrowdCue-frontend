@@ -94,7 +94,8 @@ export const authFormSlice = createSlice({
         (state, action: PayloadAction<AuthResponse>) => {
           state.status = 'idle';
           state.loginState = 'success';
-          sessionStorage.setItem('Bearer', action.payload.accessToken);
+          sessionStorage.setItem('User ID', action.payload.userId);
+          sessionStorage.setItem('Access Token', action.payload.accessToken);
         },
       )
       .addCase(checkForExistingUser.rejected, (state, action: any) => {

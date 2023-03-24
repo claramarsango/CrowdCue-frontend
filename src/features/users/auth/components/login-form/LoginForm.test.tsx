@@ -24,7 +24,7 @@ describe('Given a log in form,', () => {
     fireEvent.click(submitButton);
 
     await waitFor(async () => {
-      const token = await sessionStorage.getItem('Bearer');
+      const token = await sessionStorage.getItem('Access Token');
       expect(token).toBe('token');
     });
   });
