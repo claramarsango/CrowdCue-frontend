@@ -1,7 +1,5 @@
-import { render, screen, waitFor } from '@testing-library/react';
-import { Provider } from 'react-redux';
+import { screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { store } from '../../../../../app/store';
 import { errorHandlers } from '../../../../../mocks/handlers';
 import { server } from '../../../../../mocks/server';
 import { renderWithProviders } from '../../../../../mocks/test-utils';
