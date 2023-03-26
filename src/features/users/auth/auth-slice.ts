@@ -73,7 +73,7 @@ export const authFormSlice = createSlice({
     builder
       .addCase(checkForRegisteredUser.pending, state => {
         state.status = 'loading';
-        state.loginState = 'idle';
+        state.registerState = 'idle';
       })
       .addCase(checkForRegisteredUser.fulfilled, (state, action) => {
         state.status = 'idle';
