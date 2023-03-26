@@ -118,9 +118,10 @@ export const sessionComponentSlice = createSlice({
         state.status = 'loading';
         state.createSessionState = 'idle';
       })
-      .addCase(createSessionAsync.fulfilled, (state, action) => {
+      .addCase(createSessionAsync.fulfilled, (state, action: any) => {
         state.status = 'idle';
         state.createSessionState = 'success';
+        state.session = action.payload;
       })
       .addCase(createSessionAsync.rejected, (state, action: any) => {
         state.status = 'failed';

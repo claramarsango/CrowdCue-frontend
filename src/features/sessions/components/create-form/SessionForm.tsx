@@ -1,11 +1,25 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
-import { createSessionAsync, selectSessionState } from '../../sessions-slice';
+import {
+  createSessionAsync,
+  getSessionDetailAsync,
+  selectSessionState,
+} from '../../sessions-slice';
 import { CreateSessionForm } from './session-form-styled';
 
 const SessionForm = () => {
   const submitState = useAppSelector(selectSessionState);
-  const { createSessionState, sessionMsg } = submitState;
+  const { createSessionState, sessionMsg, session } = submitState;
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (createSessionState === 'success') {
+      dispatch(getSessionDetailAsync(session._id.toString()));
+      navigate(`/sessions/${session._id}`);
+    }
+  }, [createSessionState, dispatch, navigate, session._id]);
 
   return (
     <>
