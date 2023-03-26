@@ -14,7 +14,7 @@ export const SessionControlsStyled = styled.div`
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 10rem;
+    height: 8rem;
     background-color: var(--background-color-faded-grey);
     border-radius: var(--mobile-button-border-radius);
   }
@@ -65,7 +65,7 @@ export const SessionControlsStyled = styled.div`
   }
 
   @media (min-width: 1440px) {
-    padding: 2rem 0;
+    padding: 1rem 0;
     gap: 5rem;
 
     .participants,

@@ -1,19 +1,17 @@
-import { render } from '@testing-library/react';
-import { Provider } from 'react-redux';
+import { screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { store } from '../../app/store';
+import { renderWithProviders } from '../../mocks/test-utils';
 import MainLayout from './MainLayout';
 
 describe('Given a main layout,', () => {
-  test('when a create session page is loaded, it should include a page title', async () => {
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <MainLayout />
-        </MemoryRouter>
-      </Provider>,
+  test('when the layout loads, it should include a header and a main section', async () => {
+    renderWithProviders(
+      <MemoryRouter>
+        <MainLayout />
+      </MemoryRouter>,
     );
 
-    expect(true).toBe(true);
+    expect(screen.getByRole('banner')).toBeInTheDocument();
+    expect(screen.getByRole('main')).toBeInTheDocument();
   });
 });

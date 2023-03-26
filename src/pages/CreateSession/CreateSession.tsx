@@ -1,5 +1,5 @@
-import { SectionTitle } from '../../features/sessions/components/create-form/session-form-styled';
 import SessionForm from '../../features/sessions/components/create-form/SessionForm';
+import { SectionTitle } from '../../shared/styles/shared-styled';
 
 const CreateSession = () => {
   return (

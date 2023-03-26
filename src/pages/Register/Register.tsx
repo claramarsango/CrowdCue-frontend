@@ -1,5 +1,5 @@
 import RegisterForm from '../../features/users/auth/components/register-form/RegisterForm';
-import { PageTitle } from '../../shared/styles/PageTitleStyled';
+import { PageTitle } from '../../shared/styles/shared-styled';
 
 const Register = () => {
   return (
