@@ -6,15 +6,37 @@ import ExploreSessions from '../pages/ExploreSessions/ExploreSessions';
 import Login from '../pages/Login/Login';
 import Register from '../pages/Register/Register';
 import SessionDetail from '../pages/SessionDetail/SessionDetail';
+import CheckAuth from '../shared/components/check-auth/CheckAuth';
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <MainLayout />,
     children: [
-      { path: '', element: <ExploreSessions /> },
-      { path: 'sessions', element: <CreateSession /> },
-      { path: 'sessions/:_id', element: <SessionDetail /> },
+      {
+        path: '',
+        element: (
+          <CheckAuth>
+            <ExploreSessions />
+          </CheckAuth>
+        ),
+      },
+      {
+        path: 'sessions',
+        element: (
+          <CheckAuth>
+            <CreateSession />
+          </CheckAuth>
+        ),
+      },
+      {
+        path: 'sessions/:_id',
+        element: (
+          <CheckAuth>
+            <SessionDetail />
+          </CheckAuth>
+        ),
+      },
     ],
   },
   {
