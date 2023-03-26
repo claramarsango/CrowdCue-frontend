@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import ErrorFeedback from '../../../../shared/components/error-feedback/ErrorFeedback';
 import Loading from '../../../../shared/components/loading/Loading';
+import { SectionTitle } from '../../../../shared/styles/shared-styled';
 import {
   getSessionDetailAsync,
   selectSessionState,
 } from '../../sessions-slice';
-import { SectionTitle } from '../create-form/session-form-styled';
 import Modal from '../modal/Modal';
 import { SessionControlsStyled } from './session-controls-styled';
 
