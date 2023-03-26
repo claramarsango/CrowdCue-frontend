@@ -2,14 +2,14 @@ import styled from 'styled-components';
 
 export const ModalStyled = styled.div`
   position: absolute;
-  top: 4rem;
+  bottom: 0.2rem;
   z-index: 10;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  gap: 4rem;
+  gap: 5.25rem;
   background-color: rgb(24, 24, 36);
-  height: 75%;
+  height: 80%;
   padding: 2rem 1rem;
   margin: 1.5rem;
   border-radius: var(--mobile-button-border-radius);
@@ -31,7 +31,7 @@ export const ModalStyled = styled.div`
   .buttons-container {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1.5rem;
   }
 
   .buttons__end,
@@ -61,7 +61,7 @@ export const ModalStyled = styled.div`
     width: 100%;
     height: auto;
     margin: 0;
-    padding: 3rem;
+    padding: 2rem;
     border-radius: var(--mobile-button-border-radius)
       var(--mobile-button-border-radius) 0 0;
 

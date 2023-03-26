@@ -1,19 +1,10 @@
 import styled from 'styled-components';
 
-export const SectionTitle = styled.h2`
-  padding: 2rem;
-
-  @media (min-width: 1440px) {
-    padding: 3rem;
-    font-size: var(--desktop-text-size-xl);
-  }
-`;
-
 export const CreateSessionForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2.5rem;
+  gap: 2rem;
   padding: 0 2rem;
   position: relative;
 
@@ -29,8 +20,8 @@ export const CreateSessionForm = styled.form`
   }
 
   .image__input-container {
-    height: 15rem;
-    width: 15rem;
+    height: 13rem;
+    width: 13rem;
   }
 
   .image__input {
@@ -40,8 +31,8 @@ export const CreateSessionForm = styled.form`
   }
 
   .image__input::file-selector-button {
-    height: 15rem;
-    width: 15rem;
+    height: 13rem;
+    width: 13rem;
     font-size: 1rem;
     font-family: Poppins, sans-serif;
     color: rgba(124, 124, 124);
@@ -100,7 +91,7 @@ export const CreateSessionForm = styled.form`
   }
 
   @media (min-width: 1400px) {
-    padding: 3rem;
+    padding: 2rem;
 
     .form__input-fields {
       flex-direction: row;
@@ -113,13 +104,13 @@ export const CreateSessionForm = styled.form`
     }
 
     .image__input-container {
-      height: 35rem;
-      width: 35rem;
+      height: 30rem;
+      width: 30rem;
     }
 
     .image__input::file-selector-button {
-      height: 35rem;
-      width: 35rem;
+      height: 30rem;
+      width: 30rem;
       font-size: var(--desktop-text-size-xs);
     }
 
