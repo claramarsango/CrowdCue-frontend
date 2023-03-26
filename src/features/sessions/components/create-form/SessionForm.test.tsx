@@ -1,6 +1,7 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
+import { MemoryRouter } from 'react-router-dom';
 import { store } from '../../../../app/store';
 import { server } from '../../../../mocks/server';
 import SessionForm from './SessionForm';
@@ -19,13 +20,22 @@ describe('Given a form to create a session when the user provides an image and a
     global.fetch = jest.fn().mockResolvedValue({
       ok: true,
       status: 201,
-      json: jest
-        .fn()
-        .mockResolvedValue({ msg: 'Your session has been created' }),
+      json: jest.fn().mockResolvedValue({
+        title: 'mockSession',
+        coverImageURL: 'img',
+        url: 'url',
+        currentSong: '',
+        queuedSongs: [],
+        admin: 'mockUserId',
+        participants: [],
+        _id: 123,
+      }),
     });
     render(
       <Provider store={store}>
-        <SessionForm />
+        <MemoryRouter>
+          <SessionForm />
+        </MemoryRouter>
       </Provider>,
     );
 
@@ -57,7 +67,9 @@ describe('Given a form to create a session,', () => {
     });
     render(
       <Provider store={store}>
-        <SessionForm />
+        <MemoryRouter>
+          <SessionForm />
+        </MemoryRouter>
       </Provider>,
     );
 
