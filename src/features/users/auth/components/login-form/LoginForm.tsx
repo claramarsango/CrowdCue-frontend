@@ -2,12 +2,18 @@ import { useAppDispatch, useAppSelector } from '../../../../../app/hooks';
 import Loading from '../../../../../shared/components/loading/Loading';
 import { checkForExistingUser, selectResponseState } from '../../auth-slice';
 import { AuthForm, RegisterLink } from '../../auth-form-styled';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const LoginForm = () => {
   const responseState = useAppSelector(selectResponseState);
   const { loginMsg, loginState, status } = responseState;
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (loginState === 'success') navigate('/');
+  }, [loginState, navigate, status]);
 
   return (
     <>
@@ -53,7 +59,11 @@ const LoginForm = () => {
           </div>
         </div>
 
-        <button className="form__submit-button" type="submit">
+        <button
+          className="form__submit-button"
+          type="submit"
+          disabled={status === 'loading' ? true : false}
+        >
           <span className="button__text">
             {status !== 'loading' ? (
               <span>Sign in</span>

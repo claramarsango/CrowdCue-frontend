@@ -91,7 +91,11 @@ const RegisterForm = () => {
               </div>
             </div>
 
-            <button className="form__submit-button" type="submit">
+            <button
+              className="form__submit-button"
+              type="submit"
+              disabled={status === 'loading' ? true : false}
+            >
               <span className="button__text">
                 {status !== 'loading' ? (
                   <span>Sign up</span>
