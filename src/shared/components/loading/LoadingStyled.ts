@@ -31,4 +31,13 @@ export const LoadingSpinner = styled.span<LoadingSpinnerProps>`
       transform: rotate(360deg);
     }
   }
+
+  @media (min-width: 1440px) {
+    .spinner {
+      margin: ${props =>
+        props.container === 'button' ? '0 auto' : '10rem auto 5rem'};
+      width: ${props => (props.container === 'button' ? '2' : '17')}rem;
+      height: ${props => (props.container === 'button' ? '2' : '17')}rem;
+    }
+  }
 `;
