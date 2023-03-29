@@ -15,7 +15,10 @@ const SessionForm = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (createSessionState === 'success') {
+    if (
+      createSessionState === 'success' ||
+      sessionStorage.getItem('Current Session')
+    ) {
       dispatch(getSessionDetailAsync(session._id.toString()));
       navigate(`/sessions/${session._id}`);
     }

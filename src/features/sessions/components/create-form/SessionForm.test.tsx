@@ -21,14 +21,16 @@ describe('Given a form to create a session when the user provides an image and a
       ok: true,
       status: 201,
       json: jest.fn().mockResolvedValue({
-        title: 'mockSession',
-        coverImageURL: 'img',
-        url: 'url',
-        currentSong: '',
-        queuedSongs: [],
-        admin: 'mockUserId',
-        participants: [],
-        _id: 123,
+        session: {
+          title: 'mockSession',
+          coverImageURL: 'img',
+          url: 'url',
+          currentSong: '',
+          queuedSongs: [],
+          admin: 'mockUserId',
+          participants: [],
+          _id: 123,
+        },
       }),
     });
     render(
