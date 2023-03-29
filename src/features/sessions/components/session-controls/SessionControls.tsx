@@ -4,10 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import ErrorFeedback from '../../../../shared/components/error-feedback/ErrorFeedback';
 import Loading from '../../../../shared/components/loading/Loading';
 import { SectionTitle } from '../../../../shared/styles/shared-styled';
-import {
-  getSessionDetailAsync,
-  selectSessionState,
-} from '../../sessions-slice';
+import { selectSessionState, restoreAllStatus } from '../../sessions-slice';
 import Modal from '../modal/Modal';
 import { SessionControlsStyled } from './session-controls-styled';
 
@@ -16,39 +13,27 @@ interface SessionControlsProps {
 }
 
 const SessionControls: FC<SessionControlsProps> = ({ sessionId }) => {
-  const dispatch = useAppDispatch();
   const sessionDetailState = useAppSelector(selectSessionState);
+  const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
 
-  const { session, status, deleteStatus } = sessionDetailState;
+  const { session, status, exitStatus } = sessionDetailState;
   const { title, participants, admin } = session;
 
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    dispatch(getSessionDetailAsync(sessionId));
-  }, [dispatch, sessionId]);
-
-  useEffect(() => {
-    if (deleteStatus === 'success') navigate('/');
-  }, [deleteStatus, navigate]);
+    if (exitStatus === 'success') navigate('/');
+    dispatch(restoreAllStatus());
+  }, [dispatch, exitStatus, navigate]);
 
   const generateSessionDetail = () => {
     switch (status) {
       case 'loading':
-        return (
-          <>
-            <Loading container="page" />
-            <h3>Loading session</h3>
-          </>
-        );
+        return <Loading container="page" />;
       case 'failed':
-        return (
-          <>
-            <ErrorFeedback />
-          </>
-        );
+        return <ErrorFeedback />;
       default:
         return (
           <>
