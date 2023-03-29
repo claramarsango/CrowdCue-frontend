@@ -34,12 +34,35 @@ describe('Given a component that shows the detail of a session,', () => {
       </Provider>,
     );
 
-    await userEvent.click(screen.getByText('End session'));
+    userEvent.click(screen.getAllByText('End session')[1]);
 
     await waitFor(async () => {
       await expect(
         screen.getByText('This session does not exist'),
       ).toBeInTheDocument();
+    });
+  });
+
+  test('when a participants tries to leave but the session does not exist, an error should be shown', async () => {
+    server.use(...errorHandlers);
+
+    sessionStorage.setItem('User ID', 'participantId');
+    const invalidMockId = '123456789123456789123456';
+    sessionStorage.setItem('Current Session', invalidMockId);
+
+    render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <Modal setIsOpen={() => {}} sessionId={invalidMockId} />
+        </MemoryRouter>
+      </Provider>,
+    );
+
+    const exitButton = await screen.findByTestId('leave-session-button');
+
+    userEvent.click(exitButton);
+    await waitFor(async () => {
+      expect(sessionStorage.getItem('Current Session')).toBe(null);
     });
   });
 });
