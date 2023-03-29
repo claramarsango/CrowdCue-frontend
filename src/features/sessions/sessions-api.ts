@@ -52,3 +52,31 @@ export const deleteSessionById = async (id: string) => {
 
   return response;
 };
+
+export const joinSessionById = async (id: string) => {
+  const response = await fetch(
+    `${process.env.REACT_APP_API_URL}api/v1/sessions/${id}`,
+    {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem('Access Token')}`,
+      },
+    },
+  );
+
+  return response;
+};
+
+export const leaveSessionById = async (id: string) => {
+  const response = await fetch(
+    `${process.env.REACT_APP_API_URL}api/v1/sessions/${id}`,
+    {
+      method: 'PATCH',
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem('Access Token')}`,
+      },
+    },
+  );
+
+  return response;
+};
