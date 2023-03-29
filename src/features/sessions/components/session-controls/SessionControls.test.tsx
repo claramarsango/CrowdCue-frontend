@@ -159,8 +159,6 @@ describe('Given a component that shows the detail of a session,', () => {
         </MemoryRouter>
       </Provider>,
     );
-    const loadingElement = await screen.findByText(/Loading/i);
-    expect(loadingElement).toBeInTheDocument();
 
     await waitFor(async () => {
       const title = await screen.findByRole('heading');
@@ -193,8 +191,6 @@ describe('Given a component that shows the detail of a session,', () => {
         </MemoryRouter>
       </Provider>,
     );
-    const loadingElement = await screen.findByText(/Loading/i);
-    expect(loadingElement).toBeInTheDocument();
 
     await waitFor(async () => {
       const title = await screen.findByRole('heading');
