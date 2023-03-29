@@ -5,7 +5,7 @@ export interface Session {
   title: string;
   coverImageURL: string;
   url: string;
-  currentSong: Song | string;
+  currentSong?: Song | string;
   queuedSongs: Song[];
   admin: string;
   participants: User[];
