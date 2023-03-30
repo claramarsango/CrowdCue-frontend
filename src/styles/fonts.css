@@ -5,6 +5,7 @@
       format('truetype');
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Poppins';
@@ -12,6 +13,7 @@
     url(../../public/assets/fonts/Poppins/Poppins-Italic.ttf) format('truetype');
   font-weight: 400;
   font-style: oblique;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Poppins';
@@ -19,6 +21,7 @@
     url(../../public/assets/fonts/Poppins/Poppins-Light.ttf) format('truetype');
   font-weight: 300;
   font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Poppins';
@@ -27,6 +30,7 @@
       format('truetype');
   font-weight: 300;
   font-style: oblique;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Poppins';
@@ -35,6 +39,7 @@
       format('truetype');
   font-weight: 600;
   font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Poppins';
@@ -43,4 +48,5 @@
       format('truetype');
   font-weight: 600;
   font-style: oblique;
+  font-display: swap;
 }
