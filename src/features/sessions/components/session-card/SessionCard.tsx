@@ -12,18 +12,16 @@ const SessionCard: FC<SessionCardProps> = ({ session }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const sessionState = useAppSelector(selectSessionState);
-  const { joinStatus } = sessionState;
+  const { joinStatus, user } = sessionState;
 
   const { _id, title, coverImageURL } = session;
-
-  const currentSession = sessionStorage.getItem('Current Session');
 
   useEffect(() => {
     if (joinStatus === 'success') navigate(`sessions/${_id}`);
   }, [_id, navigate, joinStatus, dispatch]);
 
   const handleClick = () => {
-    if (currentSession === _id.toString()) {
+    if (user.inSession === _id.toString()) {
       navigate(`sessions/${_id}`);
       return;
     }
