@@ -19,7 +19,7 @@ const SessionControls: FC<SessionControlsProps> = ({ sessionId }) => {
   const navigate = useNavigate();
 
   const { session, status, exitStatus } = sessionDetailState;
-  const { title, participants, admin } = session;
+  const { title, participants, admin, queuedSongs } = session;
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -43,9 +43,11 @@ const SessionControls: FC<SessionControlsProps> = ({ sessionId }) => {
                 There are {participants.length} people in this session
               </p>
               <div className="player">
-                <p className="player__message">
-                  There are no songs playing currently
-                </p>
+                <audio
+                  className="player__controls"
+                  controls
+                  src={queuedSongs?.[0]?.songUrl}
+                ></audio>
               </div>
               <p className="session-url">
                 <span className="url__title">URL</span>:
