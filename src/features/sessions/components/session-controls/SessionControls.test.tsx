@@ -1,10 +1,12 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { PreloadedState } from '@reduxjs/toolkit';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Provider } from 'react-redux';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import { store } from '../../../../app/store';
+import { RootState } from '../../../../app/store';
 import { errorHandlers } from '../../../../mocks/handlers';
+import { mockedSessions } from '../../../../mocks/preloaded-state';
 import { server } from '../../../../mocks/server';
+import { renderWithProviders } from '../../../../mocks/test-utils';
 import SessionDetail from '../../../../pages/SessionDetail/SessionDetail';
 
 beforeAll(() => server.listen());
@@ -12,14 +14,22 @@ beforeEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
 describe('Given a component that shows the detail of a session,', () => {
+  const preloadedState = {
+    sessionComponent: mockedSessions[0],
+  } as unknown as PreloadedState<RootState>;
+
+  const invalidMockId = '123456789123456789123456';
+
+  const preloadedStateInvalid = {
+    sessionComponent: mockedSessions[1],
+  } as unknown as PreloadedState<RootState>;
   test('when the detail of a session is accessed, it should show its title', async () => {
     sessionStorage.setItem('Current Session', '1234');
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <SessionDetail />
-        </MemoryRouter>
-      </Provider>,
+    renderWithProviders(
+      <MemoryRouter>
+        <SessionDetail />
+      </MemoryRouter>,
+      { preloadedState },
     );
 
     await waitFor(() => {
@@ -30,15 +40,13 @@ describe('Given a component that shows the detail of a session,', () => {
   test('when the session does not exist, it should show an error message', async () => {
     server.use(...errorHandlers);
 
-    const invalidMockId = '123456789123456789123456';
     sessionStorage.setItem('Current Session', invalidMockId);
 
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <SessionDetail />
-        </MemoryRouter>
-      </Provider>,
+    renderWithProviders(
+      <MemoryRouter>
+        <SessionDetail />
+      </MemoryRouter>,
+      { preloadedState: preloadedStateInvalid },
     );
 
     await waitFor(() => {
@@ -52,15 +60,14 @@ describe('Given a component that shows the detail of a session,', () => {
     const invalidMockId = '123456789123456789123456';
     sessionStorage.setItem('Current Session', invalidMockId);
 
-    render(
-      <Provider store={store}>
-        <MemoryRouter initialEntries={['/detail']}>
-          <Routes>
-            <Route path="/detail" element={<SessionDetail />} />
-            <Route path="/" element={<h1>Explore</h1>} />
-          </Routes>
-        </MemoryRouter>
-      </Provider>,
+    renderWithProviders(
+      <MemoryRouter initialEntries={['/detail']}>
+        <Routes>
+          <Route path="/detail" element={<SessionDetail />} />
+          <Route path="/" element={<h1>Explore</h1>} />
+        </Routes>
+      </MemoryRouter>,
+      { preloadedState: preloadedStateInvalid },
     );
 
     const redirectBtn = await screen.findByText('Go back home');
@@ -76,12 +83,11 @@ describe('Given a component that shows the detail of a session,', () => {
     sessionStorage.setItem('Current Session', '1234');
     sessionStorage.setItem('User ID', '');
 
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <SessionDetail />
-        </MemoryRouter>
-      </Provider>,
+    renderWithProviders(
+      <MemoryRouter>
+        <SessionDetail />
+      </MemoryRouter>,
+      { preloadedState },
     );
 
     await waitFor(async () => {
@@ -94,12 +100,11 @@ describe('Given a component that shows the detail of a session,', () => {
     sessionStorage.setItem('Current Session', '1234');
     sessionStorage.setItem('User ID', 'participantId');
 
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <SessionDetail />
-        </MemoryRouter>
-      </Provider>,
+    renderWithProviders(
+      <MemoryRouter>
+        <SessionDetail />
+      </MemoryRouter>,
+      { preloadedState },
     );
 
     await waitFor(async () => {
@@ -111,12 +116,11 @@ describe('Given a component that shows the detail of a session,', () => {
   test('when a participant clicks on Cancel, the modal message should close', async () => {
     sessionStorage.setItem('Current Session', '1234');
 
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <SessionDetail />
-        </MemoryRouter>
-      </Provider>,
+    renderWithProviders(
+      <MemoryRouter>
+        <SessionDetail />
+      </MemoryRouter>,
+      { preloadedState },
     );
 
     await waitFor(async () => {
@@ -130,12 +134,11 @@ describe('Given a component that shows the detail of a session,', () => {
     sessionStorage.setItem('Current Session', '1234');
     sessionStorage.setItem('User ID', '');
 
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <SessionDetail />
-        </MemoryRouter>
-      </Provider>,
+    renderWithProviders(
+      <MemoryRouter>
+        <SessionDetail />
+      </MemoryRouter>,
+      { preloadedState },
     );
 
     await waitFor(async () => {
@@ -149,15 +152,14 @@ describe('Given a component that shows the detail of a session,', () => {
     sessionStorage.setItem('User ID', 'participantId');
     sessionStorage.setItem('Current Session', '1234');
 
-    render(
-      <Provider store={store}>
-        <MemoryRouter initialEntries={['/detail']}>
-          <Routes>
-            <Route path="/detail" element={<SessionDetail />}></Route>
-            <Route path="/" element={<h1>Navigation OK</h1>}></Route>
-          </Routes>
-        </MemoryRouter>
-      </Provider>,
+    renderWithProviders(
+      <MemoryRouter initialEntries={['/detail']}>
+        <Routes>
+          <Route path="/detail" element={<SessionDetail />}></Route>
+          <Route path="/" element={<h1>Navigation OK</h1>}></Route>
+        </Routes>
+      </MemoryRouter>,
+      { preloadedState },
     );
 
     await waitFor(async () => {
@@ -181,15 +183,14 @@ describe('Given a component that shows the detail of a session,', () => {
     sessionStorage.setItem('User ID', '');
     sessionStorage.setItem('Current Session', '1234');
 
-    render(
-      <Provider store={store}>
-        <MemoryRouter initialEntries={['/detail']}>
-          <Routes>
-            <Route path="/detail" element={<SessionDetail />}></Route>
-            <Route path="/" element={<h1>Home</h1>}></Route>
-          </Routes>
-        </MemoryRouter>
-      </Provider>,
+    renderWithProviders(
+      <MemoryRouter initialEntries={['/detail']}>
+        <Routes>
+          <Route path="/detail" element={<SessionDetail />}></Route>
+          <Route path="/" element={<h1>Home</h1>}></Route>
+        </Routes>
+      </MemoryRouter>,
+      { preloadedState },
     );
 
     await waitFor(async () => {

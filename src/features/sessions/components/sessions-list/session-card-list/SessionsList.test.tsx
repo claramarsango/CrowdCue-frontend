@@ -1,7 +1,10 @@
+import { PreloadedState } from '@reduxjs/toolkit';
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { RootState } from '../../../../../app/store';
 import { errorHandlers } from '../../../../../mocks/handlers';
+import { mockedSessions } from '../../../../../mocks/preloaded-state';
 import { server } from '../../../../../mocks/server';
 import { renderWithProviders } from '../../../../../mocks/test-utils';
 import SessionsList from './SessionsList';
@@ -62,6 +65,11 @@ describe('Given a session list component,', () => {
   test('when a user clicks on a session already being part of it, they should be redirected to its detail', async () => {
     sessionStorage.setItem('Current Session', '1234');
     sessionStorage.setItem('User ID', '');
+
+    const preloadedState = {
+      sessionComponent: mockedSessions[2],
+    } as unknown as PreloadedState<RootState>;
+
     renderWithProviders(
       <MemoryRouter initialEntries={['/']}>
         <Routes>
@@ -69,6 +77,7 @@ describe('Given a session list component,', () => {
           <Route path="/sessions/1234" element={<h1>Session detail</h1>} />
         </Routes>
       </MemoryRouter>,
+      { preloadedState },
     );
 
     const session = await screen.findByText('mockSession');
