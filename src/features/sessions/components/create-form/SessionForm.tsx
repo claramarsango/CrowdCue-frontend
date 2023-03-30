@@ -1,11 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
-import {
-  createSessionAsync,
-  getSessionDetailAsync,
-  selectSessionState,
-} from '../../sessions-slice';
+import { createSessionAsync, selectSessionState } from '../../sessions-slice';
 import { CreateSessionForm } from './session-form-styled';
 
 const SessionForm = () => {
@@ -15,14 +11,10 @@ const SessionForm = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (
-      createSessionState === 'success' ||
-      sessionStorage.getItem('Current Session')
-    ) {
-      dispatch(getSessionDetailAsync(session._id.toString()));
+    if (createSessionState === 'success' && session._id !== '0') {
       navigate(`/sessions/${session._id}`);
     }
-  }, [createSessionState, dispatch, navigate, session._id]);
+  }, [createSessionState, navigate, session._id]);
 
   return (
     <>
