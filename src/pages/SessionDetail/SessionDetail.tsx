@@ -1,20 +1,22 @@
 import { useEffect } from 'react';
-import { useAppDispatch } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import SessionControls from '../../features/sessions/components/session-controls/SessionControls';
-import { getSessionDetailAsync } from '../../features/sessions/sessions-slice';
+import {
+  getSessionDetailAsync,
+  selectSessionState,
+} from '../../features/sessions/sessions-slice';
 
 const SessionDetail = () => {
   const dispatch = useAppDispatch();
-
-  const currentSession = sessionStorage.getItem('Current Session') ?? '';
+  const { session } = useAppSelector(selectSessionState);
 
   useEffect(() => {
-    dispatch(getSessionDetailAsync(currentSession));
-  }, [currentSession, dispatch]);
+    dispatch(getSessionDetailAsync(session._id.toString()));
+  }, [dispatch, session._id]);
 
   return (
     <>
-      <SessionControls sessionId={currentSession} />
+      <SessionControls sessionId={session._id.toString()} />
     </>
   );
 };
