@@ -19,9 +19,8 @@ export const SessionControlsStyled = styled.div`
     border-radius: var(--mobile-button-border-radius);
   }
 
-  .player__message {
+  .player__controls {
     width: 80%;
-    font-size: var(--mobile-text-size-s);
   }
 
   .session-url {
@@ -52,6 +51,7 @@ export const SessionControlsStyled = styled.div`
     border: 0;
     border-radius: var(--mobile-button-border-radius);
     padding: 1rem 2.75rem;
+    cursor: pointer;
   }
 
   .buttons__search,
@@ -77,11 +77,12 @@ export const SessionControlsStyled = styled.div`
       width: 70%;
       height: 12rem;
       background-color: var(--background-color-faded-grey);
-      border-radius: var(--mobile-button-border-radius);
+      border-radius: 5rem;
     }
 
-    .player__message {
-      font-size: var(--desktop-text-size-s);
+    .player__controls {
+      width: 80%;
+      height: 3rem;
     }
 
     .session-url {

@@ -106,6 +106,7 @@ export const CreateSessionForm = styled.form`
     .image__input-container {
       height: 30rem;
       width: 30rem;
+      cursor: pointer;
     }
 
     .image__input::file-selector-button {
@@ -127,6 +128,7 @@ export const CreateSessionForm = styled.form`
     .title__input {
       font-size: var(--desktop-text-size-s);
       line-height: 4rem;
+      cursor: pointer;
     }
 
     .form__error {
@@ -139,6 +141,7 @@ export const CreateSessionForm = styled.form`
       height: 6rem;
       border-radius: var(--desktop-button-border-radius);
       font-size: var(--desktop-text-size-s);
+      cursor: pointer;
     }
   }
 `;

@@ -5,11 +5,11 @@ export interface Session {
   title: string;
   coverImageURL: string;
   url: string;
-  currentSong: Song | string;
+  currentSong?: Song | string;
   queuedSongs: Song[];
   admin: string;
   participants: User[];
-  _id: number;
+  _id: string;
 }
 
 export type sessionResponse = Omit<Session, 'currentSong'>;

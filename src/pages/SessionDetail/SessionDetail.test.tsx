@@ -6,6 +6,8 @@ import SessionDetail from './SessionDetail';
 
 describe('Given a detail page for a session,', () => {
   test('when a session id is given, it should show its title', async () => {
+    sessionStorage.setItem('Current Session', '');
+
     render(
       <Provider store={store}>
         <MemoryRouter>

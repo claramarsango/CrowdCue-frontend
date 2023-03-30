@@ -18,17 +18,19 @@ export const handlers = [
     (_req, res, ctx) => {
       return res(
         ctx.status(200),
-        ctx.json([
-          {
-            title: 'mockSession',
-            coverImageURL: '',
-            url: '',
-            queuedSongs: [],
-            admin: '',
-            participants: [],
-            _id: 123,
-          },
-        ]),
+        ctx.json({
+          sessions: [
+            {
+              title: 'mockSession',
+              coverImageURL: '',
+              url: '',
+              queuedSongs: [{ title: '', artist: '', songUrl: 'song' }],
+              admin: '',
+              participants: [],
+              _id: 1234,
+            },
+          ],
+        }),
       );
     },
   ),
@@ -38,14 +40,37 @@ export const handlers = [
       return res(
         ctx.status(200),
         ctx.json({
-          title: 'mockSessionById',
-          coverImageURL: '',
-          url: '',
-          queuedSongs: [],
-          admin: '',
-          participants: [],
-          _id: 1234,
+          session: {
+            title: 'mockSessionById',
+            coverImageURL: '',
+            url: '',
+            queuedSongs: [{ title: '', artist: '', songUrl: 'song' }],
+            admin: '',
+            participants: [],
+            _id: 1234,
+          },
         }),
+      );
+    },
+  ),
+  rest.post(
+    `${process.env.REACT_APP_API_URL}api/v1/sessions/1234`,
+    (_req, res, ctx) => {
+      return res(
+        ctx.status(200),
+        ctx.json({
+          sessionId: '1234',
+          msg: 'A new user has joined the session',
+        }),
+      );
+    },
+  ),
+  rest.patch(
+    `${process.env.REACT_APP_API_URL}api/v1/sessions/1234`,
+    (_req, res, ctx) => {
+      return res(
+        ctx.status(200),
+        ctx.json({ msg: 'You have left the session' }),
       );
     },
   ),
@@ -87,7 +112,27 @@ export const errorHandlers = [
   rest.get(
     `${process.env.REACT_APP_API_URL}api/v1/sessions/123456789123456789123456`,
     (_req, res, ctx) => {
-      return res.once(
+      return res(
+        ctx.status(404),
+        ctx.json({ msg: 'This session does not exist' }),
+      );
+    },
+  ),
+  rest.post(
+    `${process.env.REACT_APP_API_URL}api/v1/sessions/1234`,
+    (_req, res, ctx) => {
+      return res(
+        ctx.status(400),
+        ctx.json({
+          msg: 'You are already participating in a session',
+        }),
+      );
+    },
+  ),
+  rest.patch(
+    `${process.env.REACT_APP_API_URL}api/v1/sessions/123456789123456789123456`,
+    (_req, res, ctx) => {
+      return res(
         ctx.status(404),
         ctx.json({ msg: 'This session does not exist' }),
       );
