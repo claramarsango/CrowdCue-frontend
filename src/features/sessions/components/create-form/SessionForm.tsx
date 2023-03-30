@@ -32,7 +32,7 @@ const SessionForm = () => {
                 type="file"
                 id="session-cover"
                 name="session-cover"
-                accept="image/png, image/jpeg"
+                accept="image/png, image/jpeg image/webp"
                 data-testid="img-input"
               />
             </div>
