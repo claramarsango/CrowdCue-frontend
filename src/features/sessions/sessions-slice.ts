@@ -21,6 +21,7 @@ type apiResponseState = 'idle' | 'success' | 'error';
 export interface SessionState {
   status: 'idle' | 'loading' | 'failed';
   createSessionState: apiResponseState;
+  getSessionDetailState: apiResponseState;
   sessionMsg: string;
   previewSessions: sessionResponse[];
   session: Session;
@@ -32,6 +33,7 @@ export interface SessionState {
 const initialState: SessionState = {
   status: 'idle',
   createSessionState: 'idle',
+  getSessionDetailState: 'idle',
   sessionMsg: '',
   previewSessions: [],
   session: {
@@ -42,7 +44,7 @@ const initialState: SessionState = {
     queuedSongs: [],
     admin: '',
     participants: [],
-    _id: 0,
+    _id: '0',
   },
   exitStatus: 'idle',
   joinStatus: 'idle',
@@ -153,6 +155,7 @@ export const sessionComponentSlice = createSlice({
       state.status = 'idle';
       state.exitStatus = 'idle';
       state.joinStatus = 'idle';
+      state.getSessionDetailState = 'idle';
     },
   },
 
@@ -167,7 +170,9 @@ export const sessionComponentSlice = createSlice({
         (state, action: PayloadAction<CreateSessionResponse>) => {
           state.status = 'idle';
           state.createSessionState = 'success';
+          state.user.inSession = action.payload.session._id.toString();
           state.session = action.payload.session;
+          state.session.queuedSongs = [...action.payload.session.queuedSongs];
         },
       )
       .addCase(createSessionAsync.rejected, (state, action: any) => {
@@ -193,6 +198,7 @@ export const sessionComponentSlice = createSlice({
 
       .addCase(getSessionDetailAsync.pending, state => {
         state.status = 'loading';
+        state.getSessionDetailState = 'idle';
       })
       .addCase(
         getSessionDetailAsync.fulfilled,
@@ -200,10 +206,12 @@ export const sessionComponentSlice = createSlice({
           state.status = 'idle';
           state.session = action.payload.session;
           state.joinStatus = 'idle';
+          state.getSessionDetailState = 'success';
         },
       )
       .addCase(getSessionDetailAsync.rejected, (state, action: any) => {
         state.status = 'failed';
+        state.getSessionDetailState = 'error';
         state.sessionMsg = action.error.message;
       })
 
@@ -219,6 +227,16 @@ export const sessionComponentSlice = createSlice({
           state.exitStatus = 'success';
           state.createSessionState = 'idle';
           state.user.inSession = '';
+          state.session = {
+            title: '',
+            coverImageURL: '',
+            url: '',
+            currentSong: '',
+            queuedSongs: [],
+            admin: '',
+            participants: [],
+            _id: '0',
+          };
         },
       )
       .addCase(deleteSessionAsync.rejected, (state, action: any) => {
@@ -235,6 +253,7 @@ export const sessionComponentSlice = createSlice({
           state.status = 'idle';
           state.joinStatus = 'success';
           state.user.inSession = action.payload.sessionId;
+          state.session._id = action.payload.sessionId;
           sessionStorage.setItem('Current Session', action.payload.sessionId);
         },
       )

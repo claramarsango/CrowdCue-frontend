@@ -9,7 +9,7 @@ export interface Session {
   queuedSongs: Song[];
   admin: string;
   participants: User[];
-  _id: number;
+  _id: string;
 }
 
 export type sessionResponse = Omit<Session, 'currentSong'>;
