@@ -33,10 +33,11 @@ export const renderWithProviders = (
           queuedSongs: [],
           admin: '',
           participants: [],
-          _id: 0,
+          _id: '0',
         },
         exitStatus: 'idle',
         joinStatus: 'idle',
+        getSessionDetailState: 'idle',
         user: {
           id: 0,
           email: '',
